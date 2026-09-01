@@ -30,7 +30,6 @@ jobs:
     timeout-minutes: 20
     outputs:
       version: ${{ steps.version.outputs.version }}
-      tag: ${{ steps.version.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,7 +37,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -75,7 +74,6 @@ jobs:
             fi
           fi
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "tag=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Resolved version: $VERSION"
 
       - name: Update package.json version
@@ -153,12 +151,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ needs.prepare.outputs.tag }}
+          ref: v${{ needs.prepare.outputs.version }}
           fetch-depth: 1
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -183,7 +181,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ needs.prepare.outputs.tag }}
+          ref: v${{ needs.prepare.outputs.version }}
           fetch-depth: 0
 
       - name: Generate release notes
@@ -226,7 +224,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ needs.prepare.outputs.tag }}
+          tag_name: v${{ needs.prepare.outputs.version }}
           name: VSCode Proxy Manager v${{ needs.prepare.outputs.version }}
           body_path: /tmp/release-notes.md
           files: artifacts/*.vsix
