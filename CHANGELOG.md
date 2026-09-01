@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ### Changed
 
+- Fix node versión in workflows.
+
+## [1.1.0] - 2026-09-01
+
+### Changed
+
 - Fix release workflow.
 - Release workflow.
 - Changelog 1.1.0
