@@ -5,13 +5,15 @@ node_modules/**
 src/**
 .gitignore
 .yarnrc
+.editorconfig
+.prettierrc
+.prettierignore
+.eslintrc.json
 webpack.config.js
 **/tsconfig.json
-**/.eslintrc.json
 **/*.map
 **/*.ts
 **/.vscode-test.*
 .github/**
 resources/preview.gif
 resources/vscode proxy manager.svg
-LICENSE.txt
