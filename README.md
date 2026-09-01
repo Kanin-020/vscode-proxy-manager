@@ -93,14 +93,14 @@ npm run compile
 
 ### Scripts
 
-| Command           | Description                     |
-| ----------------- | ------------------------------- |
-| `npm run compile` | Compile the extension           |
-| `npm run watch`   | Watch for changes and recompile |
-| `npm run package` | Build production bundle         |
-| `npm run lint`    | Run ESLint                      |
-| `npm test`        | Run tests                       |
-| `npm run build`   | Package as `.vsix`              |
+| Command           | Description                                    |
+| ----------------- | ---------------------------------------------- |
+| `npm run compile` | Compile the extension                          |
+| `npm run watch`   | Watch for changes and recompile                |
+| `npm run package` | Build production bundle and package as `.vsix` |
+| `npm run lint`    | Run ESLint                                     |
+| `npm run format`    | Run format with Prettier                       |
+| `npm test`        | Run tests                                      |
 
 ## Contributing
 
