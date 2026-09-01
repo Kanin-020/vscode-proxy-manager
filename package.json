@@ -1,104 +1,104 @@
 {
-    "name": "vscode-proxy-manager",
-    "displayName": "VSCode Proxy Manager",
-    "version": "1.1.0",
-    "publisher": "kanin-020",
-    "author": {
-        "name": "Jesús Álvarez"
-    },
-    "description": "A lightweight extension to store and switch between multiple proxy configurations in VS Code.",
-    "categories": [
-        "Other"
+  "name": "vscode-proxy-manager",
+  "displayName": "VSCode Proxy Manager",
+  "version": "1.1.0",
+  "publisher": "kanin-020",
+  "author": {
+    "name": "Jesús Álvarez"
+  },
+  "description": "A lightweight extension to store and switch between multiple proxy configurations in VS Code.",
+  "categories": [
+    "Other"
+  ],
+  "icon": "resources/icon.webp",
+  "pricing": "Free",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "keywords": [
+    "pro",
+    "prox",
+    "proxy",
+    "proxy manager",
+    "proxy switcher",
+    "proxy toggle",
+    "proxy server",
+    "network proxy",
+    "http proxy",
+    "vscode"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-proxy-manager.showProxyList",
+        "title": "Proxy Manager: Show Proxy List"
+      },
+      {
+        "command": "vscode-proxy-manager.addProxy",
+        "title": "Proxy Manager: Add Proxy"
+      }
     ],
-    "icon": "resources/icon.webp",
-    "pricing": "Free",
-    "activationEvents": [
-        "onStartupFinished"
-    ],
-    "engines": {
-        "vscode": "^1.96.0"
-    },
-    "keywords": [
-        "pro",
-        "prox",
-        "proxy",
-        "proxy manager",
-        "proxy switcher",
-        "proxy toggle",
-        "proxy server",
-        "network proxy",
-        "http proxy",
-        "vscode"
-    ],
-    "main": "./dist/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "vscode-proxy-manager.showProxyList",
-                "title": "Proxy Manager: Show Proxy List"
-            },
-            {
-                "command": "vscode-proxy-manager.addProxy",
-                "title": "Proxy Manager: Add Proxy"
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "VSCode Proxy Manager",
-            "properties": {
-                "vscode-proxy-manager.proxyList": {
-                    "title": "Proxy List",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "default": [],
-                    "description": "List of available proxies to select from."
-                }
-            }
+    "configuration": {
+      "type": "object",
+      "title": "VSCode Proxy Manager",
+      "properties": {
+        "vscode-proxy-manager.proxyList": {
+          "title": "Proxy List",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "List of available proxies to select from."
         }
-    },
-    "scripts": {
-        "compile": "webpack",
-        "watch": "webpack --watch",
-        "compile-tests": "tsc -p . --outDir out",
-        "watch-tests": "tsc -p . -w --outDir out",
-        "lint": "eslint src --ext ts",
-        "lint:fix": "eslint src --ext ts --fix",
-        "format": "prettier --write \"src/**/*.ts\"",
-        "format:check": "prettier --check \"src/**/*.ts\"",
-        "pretest": "npm run compile-tests && npm run compile && npm run lint",
-        "test": "vscode-test",
-        "clean": "rimraf dist out *.vsix",
-        "compile:production": "npm run clean && webpack --mode production --devtool hidden-source-map",
-        "package": "npm run compile:production && vsce package",
-        "publish": "npm run compile:production && vsce publish"
-    },
-    "devDependencies": {
-        "@types/mocha": "^10.0.7",
-        "@types/node": "20.x",
-        "@types/vscode": "^1.96.0",
-        "@typescript-eslint/eslint-plugin": "^8.69.0",
-        "@typescript-eslint/parser": "^8.69.0",
-        "@vscode/test-cli": "^0.0.15",
-        "@vscode/test-electron": "^2.4.0",
-        "eslint": "^8.57.0",
-        "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-prettier": "^5.5.6",
-        "prettier": "^3.9.6",
-        "rimraf": "^5.0.10",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.4.5",
-        "webpack": "^5.92.1",
-        "webpack-cli": "^5.1.4"
-    },
-    "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/Kanin-020/vscode-proxy-manager"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Kanin-020/vscode-proxy-manager.git"
-    },
-    "homepage": "https://github.com/Kanin-020/vscode-proxy-manager/blob/main/README.md"
+      }
+    }
+  },
+  "scripts": {
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "lint": "eslint src --ext ts",
+    "lint:fix": "eslint src --ext ts --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "test": "vscode-test",
+    "clean": "rimraf dist out *.vsix",
+    "compile:production": "npm run clean && webpack --mode production --devtool hidden-source-map",
+    "package": "npm run compile:production && vsce package",
+    "publish": "npm run compile:production && vsce publish"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.96.0",
+    "@typescript-eslint/eslint-plugin": "^8.69.0",
+    "@typescript-eslint/parser": "^8.69.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "prettier": "^3.9.6",
+    "rimraf": "^5.0.10",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Kanin-020/vscode-proxy-manager"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kanin-020/vscode-proxy-manager.git"
+  },
+  "homepage": "https://github.com/Kanin-020/vscode-proxy-manager/blob/main/README.md"
 }

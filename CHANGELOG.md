@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ### Changed
 
+- Fix release workflow.
+- Release workflow.
+- Changelog 1.1.0
+- Better package and scripts.
+- Proxy mask.
+- Initial open source release
+
+## [1.1.0] - 2026-09-01
+
+### Changed
+
 - Performance improvements
 - Script corrections in package.json
 - Masking for proxies with credentials
