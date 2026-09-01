@@ -44,6 +44,35 @@ export function detectProtocol(proxyUrl: string): ProxyProtocol {
 }
 
 /**
+ * Obscures credentials in a proxy URL for safe display in the UI.
+ *
+ * Replaces the userinfo portion (`user:pass@` or `user@`) with `***:***@` or `***@`.
+ * URLs without credentials are returned unchanged.
+ *
+ * @param proxyUrl - The proxy URL potentially containing credentials.
+ * @returns The URL with credentials masked.
+ *
+ * @example
+ * ```ts
+ * maskProxyUrl('http://user:pass@proxy:8080');  // 'http://***:***@proxy:8080'
+ * maskProxyUrl('http://user@proxy:8080');       // 'http://***@proxy:8080'
+ * maskProxyUrl('http://proxy:8080');            // 'http://proxy:8080'
+ * ```
+ */
+export function maskProxyUrl(proxyUrl: string): string {
+    // Match: protocol://  userinfo(@)  rest
+    // userinfo may be `user:pass` or just `user`
+    const match = proxyUrl.match(/^(\w+:\/\/)([^@]+)(@.*)$/);
+    if (!match) {
+        return proxyUrl;
+    }
+
+    const [, protocol, userinfo, rest] = match;
+    const maskedUserinfo = userinfo.includes(':') ? '***:***' : '***';
+    return `${protocol}${maskedUserinfo}${rest}`;
+}
+
+/**
  * Reads the configured proxy list from VS Code settings and formats
  * each entry into a {@link ProxyOption} for display in quick pick menus.
  *
@@ -64,7 +93,7 @@ export async function getFormattedProxyOptions(): Promise<ProxyOption[]> {
     const rawProxyList = workspace.getConfiguration().get<string[]>(CONFIG_PROXY_LIST) ?? [];
 
     const formattedOptions: ProxyOption[] = rawProxyList.map((proxyUrl) => ({
-        label: proxyUrl,
+        label: maskProxyUrl(proxyUrl),
         description: detectProtocol(proxyUrl),
         value: proxyUrl,
     }));

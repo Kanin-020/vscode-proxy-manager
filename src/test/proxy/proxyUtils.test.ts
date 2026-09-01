@@ -1,6 +1,6 @@
 import { strictEqual } from 'assert';
 import { ConfigurationTarget, workspace } from 'vscode';
-import { getFormattedProxyOptions, detectProtocol } from '../../proxy/proxyUtils';
+import { getFormattedProxyOptions, detectProtocol, maskProxyUrl } from '../../proxy/proxyUtils';
 import {
     CONFIG_PROXY_LIST,
     OPTION_LABEL_NONE,
@@ -34,6 +34,42 @@ suite('proxyUtils Test Suite', () => {
         test('should be case insensitive', () => {
             strictEqual(detectProtocol('HTTP://proxy:8080'), 'HTTP');
             strictEqual(detectProtocol('HTTPS://proxy:443'), 'HTTPS');
+        });
+    });
+
+    // -------------------------------------------------------------------
+    // maskProxyUrl
+    // -------------------------------------------------------------------
+
+    suite('maskProxyUrl', () => {
+        test('should return URL unchanged when no credentials are present', () => {
+            strictEqual(maskProxyUrl('http://proxy:8080'), 'http://proxy:8080');
+        });
+
+        test('should mask user:pass credentials', () => {
+            strictEqual(maskProxyUrl('http://user:pass@proxy:8080'), 'http://***:***@proxy:8080');
+        });
+
+        test('should mask user-only credentials', () => {
+            strictEqual(maskProxyUrl('http://user@proxy:8080'), 'http://***@proxy:8080');
+        });
+
+        test('should mask credentials in HTTPS URLs', () => {
+            strictEqual(
+                maskProxyUrl('https://admin:secret@secure-proxy:443'),
+                'https://***:***@secure-proxy:443',
+            );
+        });
+
+        test('should mask credentials in SOCKS URLs', () => {
+            strictEqual(
+                maskProxyUrl('socks5://user:pass@localhost:1080'),
+                'socks5://***:***@localhost:1080',
+            );
+        });
+
+        test('should mask credentials with special characters', () => {
+            strictEqual(maskProxyUrl('http://user:p%40ss@proxy:8080'), 'http://***:***@proxy:8080');
         });
     });
 
@@ -111,6 +147,16 @@ suite('proxyUtils Test Suite', () => {
             const options = await getFormattedProxyOptions();
 
             strictEqual(options[0].label, proxy);
+            strictEqual(options[0].value, proxy);
+        });
+
+        test('should mask credentials in label while preserving original value', async () => {
+            const proxy = 'http://user:pass@proxy:8080';
+            await setProxyList([proxy]);
+
+            const options = await getFormattedProxyOptions();
+
+            strictEqual(options[0].label, 'http://***:***@proxy:8080');
             strictEqual(options[0].value, proxy);
         });
     });

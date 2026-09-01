@@ -7,10 +7,12 @@ import {
     Uri,
     QuickPickItem,
     QuickPickItemKind,
+    commands,
 } from 'vscode';
-import { getFormattedProxyOptions } from './proxyUtils';
+import { getFormattedProxyOptions, maskProxyUrl } from './proxyUtils';
 import {
     CONFIG_HTTP_PROXY,
+    CONFIG_PROXY_LIST,
     STATUS_BAR_TEXT_NO_PROXY,
     STATUS_BAR_TEXT_ACTIVE_PROXY,
     STATUS_BAR_TOOLTIP_NO_PROXY,
@@ -35,7 +37,9 @@ export function updateStatusBarForProxy(statusBar: StatusBarItem, proxyUrl: stri
     const hasProxy = proxyUrl !== '';
 
     statusBar.text = hasProxy ? STATUS_BAR_TEXT_ACTIVE_PROXY : STATUS_BAR_TEXT_NO_PROXY;
-    statusBar.tooltip = hasProxy ? `Current Proxy: ${proxyUrl}` : STATUS_BAR_TOOLTIP_NO_PROXY;
+    statusBar.tooltip = hasProxy
+        ? `Current Proxy: ${maskProxyUrl(proxyUrl)}`
+        : STATUS_BAR_TOOLTIP_NO_PROXY;
 }
 
 /**
@@ -109,6 +113,14 @@ export async function showProxyList(statusBar: StatusBarItem): Promise<void> {
             window.showErrorMessage(`Error configuring proxy: ${error}.`);
         }
     }
+}
+
+/**
+ * Opens VS Code settings filtered to the proxy list configuration,
+ * allowing the user to add or edit proxy entries.
+ */
+export function openAddProxySettings(): void {
+    commands.executeCommand('workbench.action.openSettings', CONFIG_PROXY_LIST);
 }
 
 /**

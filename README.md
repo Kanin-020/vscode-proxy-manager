@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![VS Code](https://img.shields.io/badge/VS%20Code-%5E1.96.0-blue.svg)](https://code.visualstudio.com/)
-[![Version](https://img.shields.io/badge/version-1.0.3-green.svg)](https://marketplace.visualstudio.com/items?itemName=kanin-020.vscode-proxy-manager)
+[![Version](https://img.shields.io/badge/version-1.1.0-green.svg)](https://marketplace.visualstudio.com/items?itemName=kanin-020.vscode-proxy-manager)
 
 A lightweight extension to store and switch between multiple proxy configurations in VS Code.
 

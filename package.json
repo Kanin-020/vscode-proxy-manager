@@ -1,7 +1,7 @@
 {
     "name": "vscode-proxy-manager",
     "displayName": "VSCode Proxy Manager",
-    "version": "1.0.3",
+    "version": "1.1.0",
     "publisher": "kanin-020",
     "author": {
         "name": "Jesús Álvarez"
@@ -19,6 +19,8 @@
         "vscode": "^1.96.0"
     },
     "keywords": [
+        "pro",
+        "prox",
         "proxy",
         "proxy manager",
         "proxy switcher",
@@ -30,6 +32,16 @@
     ],
     "main": "./dist/extension.js",
     "contributes": {
+        "commands": [
+            {
+                "command": "vscode-proxy-manager.showProxyList",
+                "title": "Proxy Manager: Show Proxy List"
+            },
+            {
+                "command": "vscode-proxy-manager.addProxy",
+                "title": "Proxy Manager: Add Proxy"
+            }
+        ],
         "configuration": {
             "type": "object",
             "title": "VSCode Proxy Manager",

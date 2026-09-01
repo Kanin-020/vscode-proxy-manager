@@ -10,6 +10,9 @@
 /** Command ID registered by the extension to show the proxy quick pick list. */
 export const COMMAND_SHOW_PROXY_LIST = 'vscode-proxy-manager.showProxyList';
 
+/** Command ID to open settings at the proxy list configuration. */
+export const COMMAND_ADD_PROXY = 'vscode-proxy-manager.addProxy';
+
 // ---------------------------------------------------------------------------
 // Configuration keys
 // ---------------------------------------------------------------------------
@@ -54,7 +57,7 @@ export const OPTION_DESCRIPTION_NONE = 'Disable proxy';
 export const OPTION_LABEL_ABOUT = 'About';
 
 /** Description for the About option. */
-export const OPTION_DESCRIPTION_ABOUT = 'Meet the author ♥'
+export const OPTION_DESCRIPTION_ABOUT = 'Meet the author ♥';
 
 /** Special value marker for the About option. */
 export const OPTION_VALUE_ABOUT = '__ABOUT__';

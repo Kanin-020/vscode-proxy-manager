@@ -1,6 +1,6 @@
 import { ExtensionContext, StatusBarAlignment, window, commands } from 'vscode';
-import { showProxyList, setUpProxyStatusBar } from './proxy/proxyManager';
-import { COMMAND_SHOW_PROXY_LIST, STATUS_BAR_PRIORITY } from './proxy/constants';
+import { showProxyList, setUpProxyStatusBar, openAddProxySettings } from './proxy/proxyManager';
+import { COMMAND_SHOW_PROXY_LIST, COMMAND_ADD_PROXY, STATUS_BAR_PRIORITY } from './proxy/constants';
 
 /**
  * Activates the VSCode Proxy Manager extension.
@@ -19,8 +19,13 @@ export function activate(context: ExtensionContext): void {
         showProxyList(proxyStatusBar),
     );
 
+    const addProxyCommand = commands.registerCommand(COMMAND_ADD_PROXY, () =>
+        openAddProxySettings(),
+    );
+
     context.subscriptions.push(proxyStatusBar);
     context.subscriptions.push(showProxyListCommand);
+    context.subscriptions.push(addProxyCommand);
 }
 
 /**
